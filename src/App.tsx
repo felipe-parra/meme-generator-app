@@ -39,7 +39,6 @@ export default function App() {
       ...state,
       [name]: value,
     });
-    console.log(name, value, "hc");
   };
 
   const handleClear = () => {
@@ -52,9 +51,7 @@ export default function App() {
 
   const handleExport = () => {
     const element = document.getElementById("meme");
-    console.log('element', element)
     if (!element) {
-      console.log('error, element', element)
       throw new Error("The element #portal wasn't found");
     }
     html2canvas(element).then(function (canvas) {
