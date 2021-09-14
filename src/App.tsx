@@ -8,22 +8,22 @@ import TextInputComponent from "./components/TextInput";
 const initialState = {
   imageMeme: "meme1",
   topMessage: "",
-  bottomMessage: ""
+  bottomMessage: "",
 };
 
 const optsMemes = [
   {
     id: "meme1",
-    name: "1"
+    name: "1",
   },
   {
     id: "meme2",
-    name: "2"
+    name: "2",
   },
   {
     id: "meme3",
-    name: "3"
-  }
+    name: "3",
+  },
 ];
 
 export default function App() {
@@ -37,7 +37,7 @@ export default function App() {
     const { name, value } = event.currentTarget;
     setState({
       ...state,
-      [name]: value
+      [name]: value,
     });
     console.log(name, value, "hc");
   };
@@ -46,12 +46,17 @@ export default function App() {
     setState({
       ...state,
       topMessage: "",
-      bottomMessage: ""
+      bottomMessage: "",
     });
   };
 
   const handleExport = () => {
-    const element = document.querySelector("#meme");
+    const element = document.getElementById("meme");
+    console.log('element', element)
+    if (!element) {
+      console.log('error, element', element)
+      throw new Error("The element #portal wasn't found");
+    }
     html2canvas(element).then(function (canvas) {
       const img = canvas.toDataURL("image/jpg");
       const link = document.createElement("a");
@@ -89,12 +94,11 @@ export default function App() {
           image={state.imageMeme}
         />
       </section>
-      {state.imageMeme ? (
-        <div className="buttons">
-          <button onClick={() => handleClear()}>Clear</button>
-          <button onClick={() => handleExport()}>Export</button>
-        </div>
-      ) : null}
+
+      <div className="buttons">
+        <button onClick={() => handleClear()}>Clear</button>
+        <button onClick={() => handleExport()}>Export</button>
+      </div>
     </div>
   );
 }

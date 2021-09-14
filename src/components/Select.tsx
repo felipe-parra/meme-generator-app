@@ -18,7 +18,11 @@ const SelectComponent: React.FC<Props> = ({ opts, name, handleChange }) => {
       {/* <input type="file" accept="image/*" onChange={handleChange} /> */}
       <select name={name} id={name} onChange={handleChange}>
         {opts
-          ? opts.map(({ id, name }) => <option value={id}>{name}</option>)
+          ? opts.map(({ id, name }) => (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            ))
           : null}
       </select>
     </div>
